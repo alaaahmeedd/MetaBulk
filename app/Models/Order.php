@@ -12,8 +12,16 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'price',
-        'start_time' => 'date:Y-m-d',
-        'expire_time' => '2021-11-26'
+        'Start_time',
+        'End_time'
            
     ];
+
+    /**
+     * Get the user that owns the order.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

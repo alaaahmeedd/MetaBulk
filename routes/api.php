@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,19 +20,35 @@ use Illuminate\Support\Facades\Route;
 // Public Routes Authantication
 
 
-Route::post('/register', [AuthController::class , 'register']);
+// Public Route Orders
 
-Route::post('/login', [AuthController::class , 'login']);
+Route::get('/users', [UserController::class , 'index']);
+Route::get('/users/{id}', [UserController::class , 'show']);
+Route::post('/users', [UserController::class , 'store']);
+Route::put('/users/{id}', [UserController::class , 'update']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 // Public Route Orders
 
 Route::get('/orders', [OrderController::class , 'index']);
-Route::get('/orders/{id}', [OrderController::class , 'show']);
 Route::post('/orders', [OrderController::class , 'store']);
 Route::put('/orders/{id}', [OrderController::class , 'update']);
-Route::get('/orders/search/{name}', [OrderController::class , 'search']);
 Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/register', [AuthController::class , 'register']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    
+    Route::get('/orders/{id}', [OrderController::class , 'show']);
+    Route::post('/login', [AuthController::class , 'login']);
+                                                                                                                                              
+    
+    
 });
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
