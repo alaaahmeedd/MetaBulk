@@ -40,8 +40,8 @@ Route::post('/register', [AuthController::class , 'register']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
-    Route::get('/orders/{id}', [OrderController::class , 'show']);
     Route::post('/login', [AuthController::class , 'login']);
+    Route::get('/orders/{id}', [OrderController::class , 'show']);
                                                                                                                                               
     
     

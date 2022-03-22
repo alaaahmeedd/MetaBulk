@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Dirape\Token\Token;
+
+
 
 class UserController extends Controller
 {
@@ -42,7 +43,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $user = User::find($id);
+        if(User::check())
         return User::find($id);
+
     }
 
     /**
