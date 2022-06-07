@@ -85,7 +85,7 @@ class AuthController extends Controller
                     
         }else{
 
-            return response(['error' => 'Invalid email or password'], 401);
+            return response(['error' => 'Invalid email or password'], 404);
         }
 
         // $test = $request->bearerToken();
