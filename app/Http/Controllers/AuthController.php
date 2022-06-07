@@ -54,6 +54,7 @@ class AuthController extends Controller
             'macAddress'=>'string'
             
         ]);
+        return "alaa";
          
         // Check email and Check password
         // try{
