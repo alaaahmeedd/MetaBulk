@@ -54,7 +54,6 @@ class AuthController extends Controller
             'macAddress'=>'string'
             
         ]);
-        return "alaa";
          
         // Check email and Check password
         // try{
@@ -86,7 +85,7 @@ class AuthController extends Controller
                     
         }else{
 
-            return response(['error' => 'Invalid email or password'], 404);
+            return response(['error' => 'Invalid email or password'], 401);
         }
 
         // $test = $request->bearerToken();
