@@ -27,9 +27,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            
-            'email' =>'required',
-            'password' =>'required'
+            'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'password' => 'required|min:3|max:12',
         ]);
 
          return User::create($request->all());

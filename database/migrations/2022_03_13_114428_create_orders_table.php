@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('price');
             $table->string('Start_time');
             $table->string('End_time');
+            $table->integer('num_messages')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
             ->references('id')
