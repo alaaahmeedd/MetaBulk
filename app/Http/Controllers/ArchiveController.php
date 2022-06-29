@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Archive;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ArchiveController extends Controller
@@ -42,9 +42,6 @@ class ArchiveController extends Controller
             'phones' => $validator ['phones'],
             'message' => $validator ['message'],
             'message_count' => $validator ['message_count'],
-
-
-            'message' => $validator ['message']
             
         ]);
 
@@ -54,7 +51,7 @@ class ArchiveController extends Controller
 
     public function messageToday()
     {
-        return Archive::select('message_count')->get();
+        return Archive::select('message_count')->where('user_id', 1)->whereDate('created_at', '=', Carbon::today())->get();
         
     }
        

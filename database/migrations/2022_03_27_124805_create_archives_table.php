@@ -19,7 +19,7 @@ class CreateArchivesTable extends Migration
             $table->json('names');
             $table->json('phones');
             $table->string('message');
-            $table->string('message_count');
+            $table->integer('message_count');
             $table->timestamps();
             $table->foreign('user_id')
             ->references('id')
