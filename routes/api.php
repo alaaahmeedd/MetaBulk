@@ -45,7 +45,7 @@ Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 Route::get('/archives/{id}', [ArchiveController::class , 'index']);
 Route::delete('/archives/{id}', [ArchiveController::class, 'destroy']);
 Route::put('/archives/{id}', [ArchiveController::class , 'update']);
-Route::get('/messToday/{id}', [ArchiveController::class , 'messageToday']);
+Route::get('/messToday', [ArchiveController::class , 'messageToday']);
 
 
 

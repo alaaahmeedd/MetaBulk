@@ -35,7 +35,7 @@ class ArchiveController extends Controller
         ]);
 
         $user_id =auth('api')->user()->id;
-    
+        
         $archive = Archive::create([
             'user_id' => $user_id,
             'names' => $validator ['names'],
@@ -51,8 +51,12 @@ class ArchiveController extends Controller
 
     public function messageToday()
     {
-        $archive = Archive::get();
-        return Archive::select('message_count')->where('user_id', $archive->user_id)->whereDate('created_at', '=', Carbon::today())->get();
+        $user_id =auth('api')->user()->id;
+
+        $fildes = Archive::create([
+            'user_id' => $user_id, 
+        ]);
+        return Archive::select('message_count')->where('user_id', $fildes['user_id'])->whereDate('created_at', '=', Carbon::today())->get();
         
     }
        
