@@ -31,6 +31,7 @@ class ArchiveController extends Controller
             'phones' => 'required',
             'message' => 'required',
             'message_count' => 'required'
+           
         ]);
 
         $user_id =auth('api')->user()->id;
@@ -43,6 +44,7 @@ class ArchiveController extends Controller
             'message_count' => $validator ['message_count'],
 
 
+            'message' => $validator ['message']
             
         ]);
 

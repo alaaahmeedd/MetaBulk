@@ -20,6 +20,7 @@ class AuthController extends Controller
             'password' => 'required|min:3|max:12',
             'phone' => 'required|string',
             
+
         ]);
         
         $user = User::create([
@@ -51,6 +52,7 @@ class AuthController extends Controller
             'email' => 'regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' =>'required|string',
             'macAddress'=>'string'
+            
         ]);
          
         // Check email and Check password
@@ -83,7 +85,7 @@ class AuthController extends Controller
                     
         }else{
 
-            return response(['error' => 'Invalid email or password'], 401);
+            return response(['error' => 'Invalid email or password'], 404);
         }
 
         // $test = $request->bearerToken();
