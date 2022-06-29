@@ -51,8 +51,11 @@ class ArchiveController extends Controller
 
     public function messageToday()
     {
-        $archive = Archive::first();
-        return Archive::select('message_count')->where('user_id', $archive->user_id)->whereDate('created_at', '=', Carbon::today())->get();
+        $archive = Archive::get();
+        // foreach($messages as $message){
+            return Archive::select('message_count')->whereDate('created_at', '=', Carbon::today())->get();
+
+        }
         
     }
        
