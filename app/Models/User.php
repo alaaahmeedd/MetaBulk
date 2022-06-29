@@ -23,7 +23,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'phone',
-        'api_token'
+        'signed',
+        'macAddress'
         
     ];
 
@@ -52,6 +53,14 @@ class User extends Authenticatable implements JWTSubject
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get the archives for the one user.
+     */
+    public function archives()
+    {
+        return $this->hasMany(Archive::class);
     }
 
      /**

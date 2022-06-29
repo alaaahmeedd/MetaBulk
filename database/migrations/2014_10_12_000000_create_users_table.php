@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('api_token')->default('');
-
-            
+            $table->string('macAddress')->nullable();
+            $table->boolean('signed')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
