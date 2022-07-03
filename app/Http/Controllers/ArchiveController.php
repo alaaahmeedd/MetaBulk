@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Archive;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -33,12 +34,11 @@ class ArchiveController extends Controller
             'phones' => 'required',
             'message' => 'required',
             'message_count' => 'required',
-           
 
            
         ]);
-
-        $user_id =auth('api')->user()->id;
+        $user_id = optional(Auth::user())->id;
+        // $user_id =auth('api')->user()->id;
         $message_count = Archive::where('user_id',$user_id)->whereDate('created_at', '=', Carbon::today())->sum('message_count');
         if($message_count + $validator["message_count"] <= 500){
         
