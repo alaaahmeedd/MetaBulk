@@ -43,7 +43,7 @@ class ArchiveController extends Controller
         if($message_count + $validator["message_count"] <= 500){
         
         $archive = Archive::create([
-            'user_id' => $validator ['user_id'],
+            'user_id' => $user_id,
             'names' => $validator ['names'],
             'phones' => $validator ['phones'],
             'message' => $validator ['message'],
