@@ -39,8 +39,11 @@ class ArchiveController extends Controller
         ]);
         // $user_id = optional(Auth::user())->id;
         $user_id =auth('api')->user()->id;
-        $message_count = Archive::where('user_id',$user_id)->whereDate('created_at', '=', Carbon::today())->sum('message_count');
-        if($message_count + $validator["message_count"] <= 500){
+        $message_count_today = Archive::where('user_id',$user_id)->whereDate('created_at', '=', Carbon::today())->sum('message_count');
+        $message_count_month =Archive::where('user_id',$user_id)->whereMonth('created_at', Carbon::now()->month)->get()->sum('message_count');
+       
+
+        if($message_count_today + $validator["message_count"] <= 500 and $message_count_month + $validator["message_count"] <=4500){
         
         $archive = Archive::create([
             'user_id' => $user_id,
