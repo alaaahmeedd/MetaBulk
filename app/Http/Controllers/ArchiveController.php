@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Archive;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class ArchiveController extends Controller
@@ -30,30 +32,58 @@ class ArchiveController extends Controller
             'names' => 'required',
             'phones' => 'required',
             'message' => 'required',
-            'message_count' => 'required'
+            'message_count' => 'required',
+            'user_id' => 'required',
+
            
         ]);
 
-        $user_id =auth('api')->user()->id;
+        // $user_id =auth('api')->user()->id;
+        $message_count = Archive::where('user_id',$validator ['user_id'])->whereDate('created_at', '=', Carbon::today())->sum('message_count');
+        if($message_count + $validator["message_count"] <= 500){
         
         $archive = Archive::create([
-            'user_id' => $user_id,
+            'user_id' => $validator ['user_id'],
             'names' => $validator ['names'],
             'phones' => $validator ['phones'],
             'message' => $validator ['message'],
             'message_count' => $validator ['message_count'],
             
         ]);
-
-
+        
         return response ($archive, 201);
     }
+    return response ('error',404);
+
+   
+
+}
+
+
+
 
     public function messageToday()
     {
-        return Archive::select('message_count')->where('user_id' , 22)->whereDate('created_at', '=', Carbon::today())->sum();
+        return  Archive::where('user_id',3)->whereDate('created_at', '=', Carbon::today())->sum('message_count');
+        // if($archive>500){
+        //    return Archive::create([
+        //         'user_id' => 3,
+        //         'names' => 0,
+        //         'phones' => 0,
+        //         'message' => 0,
+        //         'message_count' => '1',
+               
+        //     ]);
+         
+    // }
+    // return response (404);
+    }
 
-        }
+
+
+        // return Archive::select('message_count')->where('user_id' , 3)->whereDate('created_at', '=', Carbon::today())->count();
+
+        
         
     
        
