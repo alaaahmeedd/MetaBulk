@@ -33,13 +33,13 @@ class ArchiveController extends Controller
             'phones' => 'required',
             'message' => 'required',
             'message_count' => 'required',
-            'user_id' => 'required',
+           
 
            
         ]);
 
-        // $user_id =auth('api')->user()->id;
-        $message_count = Archive::where('user_id',$validator ['user_id'])->whereDate('created_at', '=', Carbon::today())->sum('message_count');
+        $user_id =auth('api')->user()->id;
+        $message_count = Archive::where('user_id',$user_id)->whereDate('created_at', '=', Carbon::today())->sum('message_count');
         if($message_count + $validator["message_count"] <= 500){
         
         $archive = Archive::create([
